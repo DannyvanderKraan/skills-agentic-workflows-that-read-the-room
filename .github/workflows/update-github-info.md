@@ -8,7 +8,9 @@ on:
 permissions:
   contents: read
 
-engine: copilot
+engine:
+  id: copilot
+  copilot-sdk: true
 
 tools:
   edit:
