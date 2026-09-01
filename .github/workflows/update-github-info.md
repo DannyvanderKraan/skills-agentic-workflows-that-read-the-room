@@ -36,11 +36,11 @@ the GitHub Changelog, following Mona's editorial preferences.
 
 1. Read [notes/mona-notes.md](../../notes/mona-notes.md) to understand Mona's
    editorial preferences for the GitHub Info website.
-2. Use the `web-fetch` tool to fetch `https://github.blog/latest/` for the
+2. Use the `web_fetch` tool to fetch `https://github.blog/latest/` for the
    latest posts.
-3. Use the `web-fetch` tool to fetch `https://github.blog/changelog/` for the
+3. Use the `web_fetch` tool to fetch `https://github.blog/changelog/` for the
    latest changelog entries.
-4. Use the `web-fetch` tool to fetch
+4. Use the `web_fetch` tool to fetch
    `https://awesome-copilot.github.com/workflows/` for the latest workflows.
 5. If one of those sources cannot be fetched, continue with the remaining
    sources and still open the pull request.
@@ -62,11 +62,15 @@ the GitHub Changelog, following Mona's editorial preferences.
 
 - Only modify `site/content/github-info.md`. Do not change other files.
 - Network access:
-  - `web-fetch` is the only tool with outbound network access.
+  - The web fetch tool is enabled for this workflow and is the only tool with
+    outbound network access. It is named `web_fetch` with an underscore; the
+    hyphenated `web-fetch` is only the workflow configuration key, so do not
+    look for a tool by that name.
   - `curl`, `wget`, and any other shell or bash command for network access are
     blocked by the egress firewall and must never be used.
-  - A blocked shell network command is not a missing tool and must not be
-    reported via `missing_tool`. Use `web-fetch` instead.
+  - Do not report `missing_tool` for network access. A blocked shell command is
+    not a missing tool, and the web fetch capability is available. Call
+    `web_fetch` instead.
 - Skip opening a pull request only when every source fails to fetch, or when
   none of `https://github.blog/latest/`, `https://github.blog/changelog/`,
   or `https://awesome-copilot.github.com/workflows/` returns new information
